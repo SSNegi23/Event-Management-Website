@@ -1,0 +1,14 @@
+.container {
+  flex: 0.7;
+  display: flex;
+}
+
+.left-container {
+  flex: 0.5;
+  height: 10rem;
+}
+
+.right-container {
+  flex: 0.5;
+  height: 10rem;
+}

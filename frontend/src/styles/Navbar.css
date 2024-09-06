@@ -1,0 +1,9 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navlinks ul li {
+  display: inline-block;
+  margin: 2rem 1rem;
+}
