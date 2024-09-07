@@ -1,0 +1,48 @@
+.container-I {
+  height: 86vh;
+}
+
+.title-container {
+  height: 10%;
+  display: grid;
+  place-items: center;
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.details-container {
+  height: 80%;
+}
+
+.photo-carousle {
+  display: grid;
+  place-items: center;
+  background-color: #FFB703;
+}
+
+.description {
+  background-color: #FB850050;
+  color: #023047;
+}
+
+.button-container {
+  height: 10%;
+  display: grid;
+  place-items: center;
+}
+
+.container-II {
+  height: 100vh;
+  padding: 5rem;
+}
+
+.rules-guidlines {
+  flex: 2;
+  background-color: #FB850050;
+  margin-right: 2rem;
+}
+
+.contact {
+  flex: 1;
+  background-color: #FB850050;
+}
