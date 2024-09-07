@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import Calendar from './pages/Calendar'
 import Profile from './pages/Profile'
+import Event from './pages/Event'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path='calendar' element={<Calendar />} />
         </Route>
         <Route path='profile' element={<Profile />} />
+        <Route path='event' element={<Event />} />
       </Routes>
     </div>
   )
