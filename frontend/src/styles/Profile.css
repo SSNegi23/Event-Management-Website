@@ -1,15 +1,20 @@
+
 .profile-top-container, .profile-bottom-container{
   display: flex;
-  height: 50%;
+  height: 50vh;
   width: 100%;
 }
 .profile-top-left-container , .profile-bottom-left-container{
+    margin: 0.25rem 0.25rem 0.25rem 0.25rem;
     flex:0.4;
-    background-color: antiquewhite;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .profile-top-right-container , .profile-bottom-right-container{
+    margin: 0.25rem 0.25rem 0.25rem 0.25rem;
     flex:0.6;
-    background-color: aqua;
+}
+.profile-top-right-container{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .profile-img{
     display: block;
@@ -22,14 +27,41 @@
     text-align: center;
 }
 .profile-top-right-container{
-    border-radius: 5px;
-  background-color: #FFB703;
-  margin: 0.75rem;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+.profile-top-right-container-elements-main{
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 1vw;
+  text-align: center;
+}
+.profile-top-right-container-elements-secondary{
+  padding: 20px;
+  font-size: 1vw;
+  text-align: center;
+}
+.tiles{
+  display: flex;
+  justify-content: space-evenly;
+  padding-bottom: 0.2rem;
+  padding-top: 0.2rem;
+}
+.title{
+  text-align: center;
+  font-size: 2vw;
+}
+.interests{
+  text-align: center;
+  padding: 0.2rem 0rem 0.2rem 0rem;
+}
+p{
+  margin: 0; 
 }
 input {
-    width:50%;
-    margin-right: 0.1rem!important;
-    margin-left: 0.1rem!important;
-    margin-top: 0.1rem!important;
-    margin-bottom: 0.1rem!important;
+    width: 45%;
+    margin-right: 0.25rem!important;
+    margin-left: 0.25rem!important;
+    margin-top: 0.25rem!important;
+    margin-bottom: 0.25rem!important;
 }
