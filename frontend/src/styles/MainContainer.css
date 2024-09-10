@@ -11,12 +11,12 @@
 }
 
 .sidebar-container {
-  flex: 0.3;
+  flex: 0.2;
   background-color: #219EBC;
   border-right: 1px solid black;
   padding: 10px;
 }
 
 .workarea-container {
-  flex: 0.7;
+  flex: 0.8;
 }

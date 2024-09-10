@@ -1,0 +1,16 @@
+.event-card-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: #7e7e7e;
+  gap: 1rem;
+  margin: 1rem;
+  border-radius: 1rem;
+  width: calc(23.33%-16px);
+  box-sizing: border-box;
+}
+
+.event-card-title {
+  text-align: center;
+  font-size: 20px;
+}
