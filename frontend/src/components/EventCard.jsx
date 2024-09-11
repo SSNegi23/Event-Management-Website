@@ -1,10 +1,12 @@
 import "../styles/EventCard.css";
 
-const EventCard = ({details}) => {
+const EventCard = ({ details }) => {
   return (
-    <div className='event-card-container'>
+    <div className="event-card-container">
       <div className="event-card-title">{details.title}</div>
-      <div className="event-card-image"><img src={details.img} alt="" /></div>
+      <div className="event-card-image">
+        <img src={details.img} alt="" />
+      </div>
       <div className="event-card-desc">
         <ul>
           <li>Description: {details.desc}</li>
@@ -14,7 +16,7 @@ const EventCard = ({details}) => {
         </ul>
       </div>
     </div>
-  )
-}
- 
-export default EventCard
+  );
+};
+
+export default EventCard;

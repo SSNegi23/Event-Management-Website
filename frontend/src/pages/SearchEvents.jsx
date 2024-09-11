@@ -1,4 +1,5 @@
 import EventCard from "../components/EventCard";
+import "../styles/SearchEvents.css";
 
 const details = [
   {
@@ -41,7 +42,7 @@ const details = [
 
 const SearchEvents = () => {
   return (
-    <div className="workarea-container" style={{display: "flex"}}>
+    <div className="search-events-container">
       {
         details.map((item) => (
           <EventCard details={item} key={item.id} />
