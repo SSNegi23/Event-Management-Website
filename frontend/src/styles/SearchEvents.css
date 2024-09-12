@@ -1,5 +1,22 @@
-.search-events-container {
-  flex: 0.8;
+.card-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
+
+.search-events-container{
+  flex:0.8
+}
+.Filters{
+  display: flex;
+  justify-content: space-evenly;
+}
+input{
+  width: 12vw;
+}
+.load-more-btn{
+  margin: auto;
+  display: block;
+}
+
+
+

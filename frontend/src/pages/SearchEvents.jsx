@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import EventCard from "../components/EventCard";
 import "../styles/SearchEvents.css";
 
 const details = [
   {
-    id:1,
+    id: 1,
     title: "Event Title",
     img: "src\\assets\\images\\logo.jpg",
     location: "Delhi",
@@ -12,43 +13,286 @@ const details = [
     organizer: "ASD Company",
   },
   {
-    id:2,
+    id: 2,
     title: "Event Title",
     img: "src\\assets\\images\\logo.jpg",
     location: "Delhi",
     desc: "This is the description of the event.",
-    price: 25,
-    organizer: "ASD Company",
+    price: 50,
+    organizer: "XYZ Company",
   },
   {
-    id:3,
+    id: 3,
     title: "Event Title",
     img: "src\\assets\\images\\logo.jpg",
-    location: "Delhi",
+    location: "Mumbai",
     desc: "This is the description of the event.",
-    price: 25,
-    organizer: "ASD Company",
+    price: 100,
+    organizer: "ABC Company",
   },
   {
-    id:4,
+    id: 4,
     title: "Event Title",
     img: "src\\assets\\images\\logo.jpg",
-    location: "Delhi",
+    location: "Bangalore",
     desc: "This is the description of the event.",
-    price: 25,
-    organizer: "ASD Company",
+    price: 75,
+    organizer: "DEF Company",
   },
+  {
+    id: 5,
+    title: "Event Title",
+    img: "src\\assets\\images\\logo.jpg",
+    location: "Bangalore",
+    desc: "This is the description of the event.",
+    price: 75,
+    organizer: "DEF Company",
+  },
+  {
+    id: 6,
+    title: "Event Title",
+    img: "src\\assets\\images\\logo.jpg",
+    location: "Bangalore",
+    desc: "This is the description of the event.",
+    price: 75,
+    organizer: "DEF Company",
+  },
+  {
+    id: 7,
+    title: "Event Title",
+    img: "src\\assets\\images\\logo.jpg",
+    location: "Bangalore",
+    desc: "This is the description of the event.",
+    price: 75,
+    organizer: "DEF Company",
+  },
+  {
+    id: 8,
+    title: "Event Title",
+    img: "src\\assets\\images\\logo.jpg",
+    location: "Bangalore",
+    desc: "This is the description of the event.",
+    price: 75,
+    organizer: "DEF Company",
+  },
+  {
+    id: 9,
+    title: "Event Title",
+    img: "src\\assets\\images\\logo.jpg",
+    location: "Bangalore",
+    desc: "This is the description of the event.",
+    price: 75,
+    organizer: "DEF Company",
+  },
+  {
+    id: 10,
+    title: "Event Title",
+    img: "src\\assets\\images\\logo.jpg",
+    location: "Bangalore",
+    desc: "This is the description of the event.",
+    price: 75,
+    organizer: "DEF Company",
+  },
+  {
+    id: 11,
+    title: "Event Title",
+    img: "src\\assets\\images\\logo.jpg",
+    location: "Bangalore",
+    desc: "This is the description of the event.",
+    price: 75,
+    organizer: "DEF Company",
+  },
+  {
+    id: 12,
+    title: "Event Title",
+    img: "src\\assets\\images\\logo.jpg",
+    location: "Bangalore",
+    desc: "This is the description of the event.",
+    price: 75,
+    organizer: "DEF Company",
+  },
+  {
+    id: 13,
+    title: "Event Title",
+    img: "src\\assets\\images\\logo.jpg",
+    location: "Bangalore",
+    desc: "This is the description of the event.",
+    price: 75,
+    organizer: "DEF Company",
+  },
+  {
+    id: 14,
+    title: "Event Title",
+    img: "src\\assets\\images\\logo.jpg",
+    location: "Bangalore",
+    desc: "This is the description of the event.",
+    price: 75,
+    organizer: "DEF Company",
+  },
+  {
+    id: 15,
+    title: "Event Title",
+    img: "src\\assets\\images\\logo.jpg",
+    location: "Bangalore",
+    desc: "This is the description of the event.",
+    price: 75,
+    organizer: "DEF Company",
+  },
+  {
+    id: 16,
+    title: "Event Title",
+    img: "src\\assets\\images\\logo.jpg",
+    location: "Bangalore",
+    desc: "This is the description of the event.",
+    price: 75,
+    organizer: "DEF Company",
+  },
+  {
+    id: 17,
+    title: "Event Title",
+    img: "src\\assets\\images\\logo.jpg",
+    location: "Bangalore",
+    desc: "This is the description of the event.",
+    price: 75,
+    organizer: "DEF Company",
+  },
+  {
+    id: 18,
+    title: "Event Title",
+    img: "src\\assets\\images\\logo.jpg",
+    location: "Bangalore",
+    desc: "This is the description of the event.",
+    price: 75,
+    organizer: "DEF Company",
+  },
+  {
+    id: 19,
+    title: "Event Title",
+    img: "src\\assets\\images\\logo.jpg",
+    location: "Bangalore",
+    desc: "This is the description of the event.",
+    price: 75,
+    organizer: "DEF Company",
+  },
+  {
+    id: 20,
+    title: "Event Title",
+    img: "src\\assets\\images\\logo.jpg",
+    location: "Bangalore",
+    desc: "This is the description of the event.",
+    price: 75,
+    organizer: "DEF Company",
+  }
 ];
 
 const SearchEvents = () => {
+  const [filteredDetails, setFilteredDetails] = useState(details);
+  const [location, setLocation] = useState("");
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+  const [organizer, setOrganizer] = useState("");
+  const [visibleCards, setVisibleCards] = useState(9);  // State to control visible cards
+
+
+  const handleFiltersChange = (e, field) => {
+    let newLocation = location;
+    let newMinPrice = minPrice;
+    let newMaxPrice = maxPrice;
+    let newOrganizer = organizer;
+
+    if (field === "location") {
+      newLocation = e.target.value;
+      setLocation(newLocation);
+    } else if (field === "minPrice") {
+      newMinPrice = e.target.value;
+      setMinPrice(newMinPrice);
+    } else if (field === "maxPrice") {
+      newMaxPrice = e.target.value;
+      setMaxPrice(newMaxPrice);
+    } else if (field === "organizer") {
+      newOrganizer = e.target.value;
+      setOrganizer(newOrganizer);
+    }
+
+    
+    const newDetails = details.filter((item) => {
+      const matchesLocation = newLocation === "" || item.location.toLowerCase().includes(newLocation.toLowerCase());
+      const matchesPrice = (newMinPrice === "" || item.price >= parseInt(newMinPrice)) &&
+                           (newMaxPrice === "" || item.price <= parseInt(newMaxPrice));
+      const matchesOrganizer = newOrganizer === "" || item.organizer.toLowerCase().includes(newOrganizer.toLowerCase());
+
+      return matchesLocation && matchesPrice && matchesOrganizer;
+    });
+
+    setFilteredDetails(newDetails);
+  };
+
+  const handleLoadMore = () => {
+    if(visibleCards+9<filteredDetails.length){
+      setVisibleCards(visibleCards+9);
+    }
+    else{
+      setVisibleCards(filteredDetails.length);
+    }
+  };
+
   return (
     <div className="search-events-container">
-      {
-        details.map((item) => (
+      <div className="Filters">
+        <div className="Location">
+          <div>Location</div>
+          <div>
+            <input
+              type="text"
+              value={location}
+              onChange={(e) => handleFiltersChange(e, "location")}
+              placeholder="Type location"
+            />
+          </div>
+        </div>
+
+        <div className="Price">
+          <div>Price</div>
+          <div>
+            <input
+              type="number"
+              value={minPrice}
+              onChange={(e) => handleFiltersChange(e, "minPrice")}
+              placeholder="Min Price"
+            />
+            <input
+              type="number"
+              value={maxPrice}
+              onChange={(e) => handleFiltersChange(e, "maxPrice")}
+              placeholder="Max Price"
+            />
+          </div>
+        </div>
+
+        <div className="Organiser">
+          <div>Organizer</div>
+          <div>
+            <input
+              type="text"
+              value={organizer}
+              onChange={(e) => handleFiltersChange(e, "organizer")}
+              placeholder="Type organizer"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="card-container">
+        {filteredDetails.slice(0, visibleCards).map((item) => (
           <EventCard details={item} key={item.id} />
-        ))
-      }
-      {/* <img src="src\assets\images\logo.jpg" alt="" /> */}
+        ))}
+      </div>
+
+      {visibleCards < filteredDetails.length && (
+        <button onClick={handleLoadMore} className="load-more-btn">
+          Load More
+        </button>
+      )}
     </div>
   );
 };
