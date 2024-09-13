@@ -17,6 +17,11 @@
   padding: 10px;
 }
 
+.sidebar-container ul li {
+  margin: 1rem;
+  cursor: pointer;
+}
+
 .workarea-container {
   flex: 0.8;
 }
