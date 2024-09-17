@@ -1,9 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import { useState } from "react";
 import "../styles/EventForm.css";
 
 const Sidebar = () => {
-
   const [events, setEvents] = useState([]);
   const [formData, setFormData] = useState({
     title: "",
@@ -54,28 +53,30 @@ const Sidebar = () => {
   const navigate = useNavigate();
   return (
     <>
-    {showModal && (
+      {showModal && (
         <div className="modal">
           <div className="modal-content">
             <h2>New Event</h2>
             <form onSubmit={handleSubmit}>
-              <label>Title</label>
-              <input
-                type="text"
-                name="title"
-                value={formData.title}
-                onChange={handleChange}
-                required
-              />
+              <div>
+                <label>Title</label>
+                <input
+                  type="text"
+                  name="title"
+                  value={formData.title}
+                  onChange={handleChange}
+                  required
+                />
 
-              <label>Location</label>
-              <input
-                type="text"
-                name="location"
-                value={formData.location}
-                onChange={handleChange}
-                required
-              />
+                <label>Location</label>
+                <input
+                  type="text"
+                  name="location"
+                  value={formData.location}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
 
               <label>Description</label>
               <textarea
@@ -101,21 +102,23 @@ const Sidebar = () => {
                 onChange={handleChange}
               />
 
-              <label>Payment Amount</label>
-              <input
-                type="number"
-                name="paymentAmount"
-                value={formData.paymentAmount}
-                onChange={handleChange}
-              />
+              <div>
+                <label>Payment Amount</label>
+                <input
+                  type="number"
+                  name="paymentAmount"
+                  value={formData.paymentAmount}
+                  onChange={handleChange}
+                />
 
-              <label>Contacts</label>
-              <input
-                type="text"
-                name="contacts"
-                value={formData.contacts}
-                onChange={handleChange}
-              />
+                <label>Contacts</label>
+                <input
+                  type="text"
+                  name="contacts"
+                  value={formData.contacts}
+                  onChange={handleChange}
+                />
+              </div>
 
               <button type="submit">Submit</button>
             </form>
@@ -123,21 +126,29 @@ const Sidebar = () => {
           </div>
         </div>
       )}
-    <div className='sidebar-container'>
-      <ul>
-        <li onClick={() => setShowModal(true)}><i className="fa-solid fa-plus"></i> New Item</li>
-        <li onClick={() => {
-          navigate('calendar');
-        }}>Calendar</li>
-        <li onClick={() => {
-          navigate('search-event');
-        }}>Upcoming Events</li>
-      </ul>
-    </div>
+      <div className="sidebar-container">
+        <ul>
+          <li onClick={() => setShowModal(true)}>
+            <i className="fa-solid fa-plus"></i> New Item
+          </li>
+          <li
+            onClick={() => {
+              navigate("calendar");
+            }}
+          >
+            Calendar
+          </li>
+          <li
+            onClick={() => {
+              navigate("search-event");
+            }}
+          >
+            Upcoming Events
+          </li>
+        </ul>
+      </div>
     </>
+  );
+};
 
-    
-  )
-}
-
-export default Sidebar
+export default Sidebar;

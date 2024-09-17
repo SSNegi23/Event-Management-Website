@@ -21,7 +21,40 @@
   border-radius: 8px;
 }
 
-/* Close Button */
+.modal-content h2 {
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  margin: 1.5rem;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.modal-content form input, textarea {
+  border: 1px solid black;
+}
+
+.modal-content form div {
+  display: flex;
+}
+
+.modal-content form div input {
+  flex: 1;
+}
+
+.modal-content form textarea {
+  height: 4rem;
+}
+
 button {
+  width: 20%;
   margin-top: 10px;
+  border: 1px solid black;
+  border-radius: 2rem;
+  background-color: blue;
 }
