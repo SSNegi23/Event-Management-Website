@@ -7,6 +7,7 @@ import Profile from './pages/Profile'
 import Event from './pages/Event'
 import SearchEvents from './pages/SearchEvents'
 import MyCalendar from './pages/Calendar'
+import EventMaker from './pages/EventMaker'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         </Route>
         <Route path='profile' element={<Profile />} />
         <Route path='event' element={<Event />} />
+        <Route path='eventmaker' element={<EventMaker />}/>
       </Routes>
     </div>
   )
