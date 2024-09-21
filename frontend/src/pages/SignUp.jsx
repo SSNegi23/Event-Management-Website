@@ -1,5 +1,5 @@
 import React from 'react'
-import "../styles/Login.css";
+import "../styles/SignUp.css";
 
 const Login = () => {
   return (
@@ -10,9 +10,11 @@ const Login = () => {
       <div className='login-right'>
         <div className='login-div'>
            <form className='login-form'>
-            <p className='login-heading'>Login</p>
+            <p className='login-heading'><b>SignUp</b></p>
             <label>Username</label>
             <input placeholder='Username'></input>
+            <label>Email</label>
+            <input placeholder='Email'></input>
             <label>Password</label>
             <input placeholder='Password'></input>
             <button type='submit' className='login-button'>Login</button>

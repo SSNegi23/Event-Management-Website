@@ -8,6 +8,8 @@ import Event from './pages/Event'
 import SearchEvents from './pages/SearchEvents'
 import MyCalendar from './pages/Calendar'
 import EventMaker from './pages/EventMaker'
+import Login from './pages/Login'
+import SignUp from './pages/SignUp'
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
         <Route path='profile' element={<Profile />} />
         <Route path='event' element={<Event />} />
         <Route path='eventmaker' element={<EventMaker />}/>
+        <Route path='login' element={<Login />}/>
+        <Route path='signup' element={<SignUp />}/>
       </Routes>
     </div>
   )
