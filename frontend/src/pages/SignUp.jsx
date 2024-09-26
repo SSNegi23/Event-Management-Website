@@ -1,29 +1,46 @@
-import React from 'react'
-import "../styles/SignUp.css";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const SignUp = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const auth = localStorage.getItem('user');
+    if(auth) {
+      navigate('/');
+    }
+  }, []);
+  
+
+  const collectData = async () => {
+    console.warn(name, email, password);
+    let result = await fetch('http://localhost:5000/signup', {
+      method: 'post',
+      body: JSON.stringify({ name, email, password }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    result = await result.json();
+    console.warn(result);
+
+    localStorage.setItem("user",JSON.stringify(result.result));
+    localStorage.setItem("token",JSON.stringify(result.auth));
+    navigate('/');
+  }
+
   return (
-    <div className='login-box'>
-      <div className='login-left'>
-        <img src="src\assets\images\auth.jpeg"></img>
-      </div>
-      <div className='login-right'>
-        <div className='login-div'>
-           <form className='login-form'>
-            <p className='login-heading'><b>SignUp</b></p>
-            <label>Username</label>
-            <input placeholder='Username'></input>
-            <label>Email</label>
-            <input placeholder='Email'></input>
-            <label>Password</label>
-            <input placeholder='Password'></input>
-            <button type='submit' className='login-button'>Login</button>
-            <p> Create a new account <a ><u> Sign Up </u></a></p>
-           </form>
-        </div>
-      </div>
+    <div className='register'>
+      <h1>Register</h1>
+      <input className="inputBox" type='text' value={name} onChange={(e) => setName(e.target.value)} placeholder='Enter Name' />
+      <input className="inputBox" type='email' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Enter Email' />
+      <input className="inputBox" type='text' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Enter Password' />
+      <button className='appButton' type='button' onClick={collectData}>Sign Up</button>
     </div>
   )
 }
 
-export default Login
+export default SignUp;

@@ -1,27 +1,45 @@
-import React from 'react'
-import "../styles/Login.css";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  useEffect(() => {
+    const auth = localStorage.getItem("user");
+    if(auth) {
+      navigate("/");
+    }
+  })
+
+  const handleLogin = async () => {
+    // console.warn(email, password);
+    let result = await fetch('http://localhost:5000/login', {
+      method: 'post',
+      body: JSON.stringify({email, password}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    result = await result.json();
+    // console.warn(result);
+    if(result.auth) {
+      localStorage.setItem("user", JSON.stringify(result.user));
+      localStorage.setItem("token", JSON.stringify(result.auth));
+      navigate("/");
+    } else {
+      alert("Please enter correct details");
+    }
+  }
+
   return (
-    <div className='login-box'>
-      <div className='login-left'>
-        <img src="src\assets\images\auth.jpeg"></img>
-      </div>
-      <div className='login-right'>
-        <div className='login-div'>
-           <form className='login-form'>
-            <p className='login-heading'>Login</p>
-            <label>Username</label>
-            <input placeholder='Username'></input>
-            <label>Password</label>
-            <input placeholder='Password'></input>
-            <button type='submit' className='login-button'>Login</button>
-            <p> Create a new account <a ><u> Sign Up </u></a></p>
-           </form>
-        </div>
-      </div>
+    <div className='login'>
+      {/* <h1>Login Page</h1> */}
+      <input type='text' className='inputBox' placeholder='Enter Email' onChange={(e) => setEmail(e.target.value)} value={email} />
+      <input type='password' className='inputBox' placeholder='Enter Password' onChange={(e) => setPassword(e.target.value)} value={password} />
+      <button onClick={handleLogin} className='appButton' type='button'>Login</button>
     </div>
   )
 }
 
-export default Login
+export default Login;
