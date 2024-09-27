@@ -16,11 +16,12 @@ function App() {
     <div>
       <Navbar />
       <Routes>
-        <Route path='/' element={<MainContainer />}>
-          <Route path='/' element={<Home />} />
+        <Route path='home' element={<MainContainer />}>
+          <Route path='home' element={<Home />} />
           <Route path='calendar' element={<MyCalendar />} />
           <Route path='search-event' element={<SearchEvents />} />
         </Route>
+        <Route path='/' element={<SignUp />} />
         <Route path='profile' element={<Profile />} />
         <Route path='event' element={<Event />} />
         <Route path='eventmaker' element={<EventMaker />}/>
