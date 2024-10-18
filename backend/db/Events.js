@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
-// Create the event schema
-const EventSchema = new mongoose.Schema({
+const eventSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -14,30 +13,23 @@ const EventSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  photos: {
+    type: String, // Path to the photo file
+    required: true,
+  },
   rules: {
     type: String,
-    default: '',
   },
   paymentAmount: {
     type: Number,
-    default: 0,
+    required: true,
   },
   contacts: {
     type: String,
-    default: '',
-  },
-  image: {
-    filename: {
-      type: String,
-      required: true,
-    },
-    contentType: {
-      type: String,
-      required: true,
-    },
-  },
-}, { timestamps: true }); // Automatically add createdAt and updatedAt timestamps
+    required: true,
+  }
+});
 
-// Create and export the Event model
-const Event = mongoose.model('Event', EventSchema);
+const Event = mongoose.model('Event', eventSchema);
+
 module.exports = Event;

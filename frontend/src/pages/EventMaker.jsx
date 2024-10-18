@@ -7,7 +7,6 @@ const EventMaker = () => {
     title: "",
     location: "",
     description: "",
-    photos: null,
     rules: "",
     paymentAmount: "",
     contacts: "",
@@ -18,17 +17,12 @@ const EventMaker = () => {
   // Handle input changes
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    if (name === "photos") {
-      setFormData({
-        ...formData,
-        photos: files[0], // Save the selected file
-      });
-    } else {
+    
       setFormData({
         ...formData,
         [name]: value,
       });
-    }
+    
   };
 
   // Handle form submission
@@ -66,17 +60,13 @@ const EventMaker = () => {
       title: "",
       location: "",
       description: "",
-      photos: null,
       rules: "",
       paymentAmount: "",
       contacts: "",
     });
   };
 
-  // Function to fetch image URL from server
-  const getImageUrl = (filename) => {
-    return `http://localhost:5000/uploads/${filename}`;
-  };
+ 
 
   return (
     <div>
@@ -85,7 +75,7 @@ const EventMaker = () => {
       {showModal && (
         <div className="modal">
           <div className="modal-content">
-            <h2>New Event</h2>
+            <h2>New EventXYZ</h2>
             <form onSubmit={handleSubmit}>
               <label>Title</label>
               <input
@@ -113,14 +103,6 @@ const EventMaker = () => {
                 required
               />
 
-              <label>Photos</label>
-              <input
-                type="file"
-                name="photos"
-                onChange={handleChange}
-                accept="image/*"
-                required
-              />
 
               <label>Rules</label>
               <textarea
@@ -160,13 +142,6 @@ const EventMaker = () => {
             <h4>{event.title}</h4>
             <p>{event.location}</p>
             <p>{event.description}</p>
-            {event.image && (
-              <img
-                src={getImageUrl(event.image.filename)}
-                alt="Event"
-                width="100"
-              />
-            )}
             <p>{event.rules}</p>
             <p>Payment: {event.paymentAmount}</p>
             <p>Contacts: {event.contacts}</p>
