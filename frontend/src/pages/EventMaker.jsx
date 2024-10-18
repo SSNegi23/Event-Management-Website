@@ -18,8 +18,8 @@ const EventMaker = ({ setShowModal, showModal }) => {
   // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // if (name === "photos") {
-    //   setFormData({
+    if (name === "photos") {
+     setFormData({
     //     ...formData,
     //     photos: files[0], // Save the selected file
     //   });
@@ -63,6 +63,7 @@ const EventMaker = ({ setShowModal, showModal }) => {
       title: "",
       location: "",
       description: "",
+      photos: "",
       rules: "",
       paymentAmount: "",
       contacts: "",
@@ -81,7 +82,7 @@ const EventMaker = ({ setShowModal, showModal }) => {
       {showModal && (
         <div className="modal">
           <div className="modal-content">
-            <h2>New Event asd</h2>
+            <h2>New Event</h2>
             <form onSubmit={handleSubmit}>
               <label>Title</label>
               <input
@@ -109,14 +110,14 @@ const EventMaker = ({ setShowModal, showModal }) => {
                 required
               />
 
-              {/* <label>Photos</label>
+              <label>Photos</label>
               <input
                 type="file"
                 name="photos"
-                onChange={handleChange}
+                onChange={(e) => handleChange(e.target.files[0])}
                 accept="image/*"
                 required
-              /> */}
+              /> 
 
               <label>Rules</label>
               <textarea
