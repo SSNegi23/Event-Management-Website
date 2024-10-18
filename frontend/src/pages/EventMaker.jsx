@@ -1,58 +1,55 @@
 import { useState } from "react";
 import "../styles/EventForm.css";
 
-const EventMaker = () => {
+const EventMaker = ({ setShowModal, showModal }) => {
   const [events, setEvents] = useState([]);
   const [formData, setFormData] = useState({
     title: "",
     location: "",
     description: "",
-    photos: null,
+    // photos: null,
     rules: "",
     paymentAmount: "",
     contacts: "",
   });
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   // Handle input changes
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === "photos") {
-      setFormData({
-        ...formData,
-        photos: files[0], // Save the selected file
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    }
+    const { name, value } = e.target;
+    // if (name === "photos") {
+    //   setFormData({
+    //     ...formData,
+    //     photos: files[0], // Save the selected file
+    //   });
+    // } else {
+    // }
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
+  // Handle form submission
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Create FormData object to send files
-    const formDataToSend = new FormData();
-    Object.entries(formData).forEach(([key, value]) => {
-      formDataToSend.append(key, value);
-    });
-
     try {
       const response = await fetch("http://localhost:5000/upload", {
         method: "POST",
-        body: formDataToSend,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData), // Send formData directly as JSON
       });
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Event created:", data);
         setEvents([...events, data.event]);
-        setShowModal(false); // Close the modal after submission
-        setErrorMessage(""); // Clear any previous errors
+        setShowModal(false);
+        setErrorMessage("");
       } else {
         setErrorMessage("Failed to create event");
       }
@@ -61,22 +58,21 @@ const EventMaker = () => {
       console.error("Error:", error);
     }
 
-    // Reset the form
+    // Reset form
     setFormData({
       title: "",
       location: "",
       description: "",
-      photos: null,
       rules: "",
       paymentAmount: "",
       contacts: "",
     });
   };
 
-  // Function to fetch image URL from server
-  const getImageUrl = (filename) => {
-    return `http://localhost:5000/uploads/${filename}`;
-  };
+  // Get image URL from server
+  // const getImageUrl = (filename) => {
+  //   return `http://localhost:5000/uploads/${filename}`;
+  // };
 
   return (
     <div>
@@ -85,7 +81,7 @@ const EventMaker = () => {
       {showModal && (
         <div className="modal">
           <div className="modal-content">
-            <h2>New Event</h2>
+            <h2>New Event asd</h2>
             <form onSubmit={handleSubmit}>
               <label>Title</label>
               <input
@@ -113,14 +109,14 @@ const EventMaker = () => {
                 required
               />
 
-              <label>Photos</label>
+              {/* <label>Photos</label>
               <input
                 type="file"
                 name="photos"
                 onChange={handleChange}
                 accept="image/*"
                 required
-              />
+              /> */}
 
               <label>Rules</label>
               <textarea
@@ -160,13 +156,13 @@ const EventMaker = () => {
             <h4>{event.title}</h4>
             <p>{event.location}</p>
             <p>{event.description}</p>
-            {event.image && (
+            {/* {event.image && (
               <img
-                src={getImageUrl(event.image.filename)}
+                src={getImageUrl(event.image)} // Use image directly
                 alt="Event"
                 width="100"
               />
-            )}
+            )} */}
             <p>{event.rules}</p>
             <p>Payment: {event.paymentAmount}</p>
             <p>Contacts: {event.contacts}</p>

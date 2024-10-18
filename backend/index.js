@@ -2,38 +2,15 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const multer = require("multer");
-const { GridFsStorage } = require("multer-gridfs-storage");
-const Grid = require("gridfs-stream");
 const Jwt = require("jsonwebtoken");
 const User = require("./db/User");
 const Event = require("./db/Events");
-require("./db/config");  // This ensures the connection is established
+require("./db/config");
 
 const jwtKey = "event-management";
-
 const app = express();
 app.use(express.json());
 app.use(cors());
-
-const conn = mongoose.connection; // Use the existing connection from config
-let gfs;
-
-conn.once("open", () => {
-  gfs = Grid(conn.db, mongoose.mongo);
-  gfs.collection("uploads");
-});
-
-// Configure Multer storage for GridFS
-const storage = new GridFsStorage({
-  url: conn.client.s.url,  // Use the same URL from the established connection
-  file: (req, file) => {
-    return {
-      filename: file.originalname,
-      bucketName: "uploads",
-    };
-  },
-});
-const upload = multer({ storage });
 
 // User signup route
 app.post("/signup", async (req, res) => {
@@ -44,9 +21,9 @@ app.post("/signup", async (req, res) => {
     delete result.password;
     Jwt.sign({ result }, jwtKey, { expiresIn: "2h" }, (err, token) => {
       if (err) {
-        return res.send({ result: "Something went wrong, please try again." });
+        return res.status(500).send({ message: "Something went wrong, please try again." });
       }
-      res.send({ result, auth: token });
+      res.status(201).send({ result, auth: token });
     });
   } catch (error) {
     res.status(400).send(error);
@@ -57,28 +34,50 @@ app.post("/signup", async (req, res) => {
 app.post("/login", async (req, res) => {
   if (req.body.email && req.body.password) {
     try {
-      let user = await User.findOne(req.body).select("-password");
+      let user = await User.findOne({ email: req.body.email, password: req.body.password }).select("-password");
       if (user) {
         Jwt.sign({ user }, jwtKey, { expiresIn: "2h" }, (err, token) => {
           if (err) {
-            return res.send({ result: "Something went wrong, please try again." });
+            return res.status(500).send({ message: "Something went wrong, please try again." });
           }
           res.send({ user, auth: token });
         });
       } else {
-        res.send({ result: "No User Found" });
+        res.status(400).send({ message: "No User Found" });
       }
     } catch (error) {
       res.status(400).send(error);
     }
   } else {
-    res.send({ result: "No User Found" });
+    res.status(400).send({ message: "Invalid credentials" });
   }
 });
 
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "uploads/");
+//   },
+//   filename: (req, file, cb) => {
+//     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+//     cb(null, file.fieldname + "-" + uniqueSuffix + "-" + file.originalname);
+//   },
+// });
+
+// const upload = multer({
+//   storage,
+//   fileFilter: (req, file, cb) => {
+//     if (file.mimetype.startsWith('image/')) {
+//       cb(null, true);
+//     } else {
+//       cb(new Error('Invalid file type, only images are allowed!'), false);
+//     }
+//   }
+// });
+
 // Route to upload images and create an event
-app.post("/upload", upload.single("photos"), async (req, res) => {
-  if (!req.file) return res.status(400).send("No file uploaded");
+// app.post("/upload", upload.single("photos"), async (req, res) => {
+app.post("/upload", async (req, res) => {
+  // if (!req.file) return res.status(400).send("No file uploaded");
 
   const event = new Event({
     title: req.body.title,
@@ -87,10 +86,7 @@ app.post("/upload", upload.single("photos"), async (req, res) => {
     rules: req.body.rules,
     paymentAmount: req.body.paymentAmount,
     contacts: req.body.contacts,
-    image: {
-      filename: req.file.filename,
-      contentType: req.file.mimetype,
-    },
+    // image: req.file.filename,
   });
 
   try {

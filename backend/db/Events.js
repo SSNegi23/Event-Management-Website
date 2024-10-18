@@ -26,17 +26,18 @@ const EventSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
-  image: {
-    filename: {
-      type: String,
-      required: true,
-    },
-    contentType: {
-      type: String,
-      required: true,
-    },
-  },
-}, { timestamps: true }); // Automatically add createdAt and updatedAt timestamps
+  // image: {
+  //   // filename: {
+  //   //   type: String,
+  //   //   required: true,
+  //   // },
+  //   // contentType: {
+  //   //   type: String,
+  //   //   required: true,
+  //   // },
+  //   type: String,
+  // },
+}, { timestamps: true, collection: "Event" }); // Automatically add createdAt and updatedAt timestamps
 
 // Create and export the Event model
 const Event = mongoose.model('Event', EventSchema);
