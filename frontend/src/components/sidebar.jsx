@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "../styles/EventForm.css";
+import EventMaker from "../pages/EventMaker";
 
 const Sidebar = () => {
   const [events, setEvents] = useState([]);
@@ -53,7 +54,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
   return (
     <>
-      {showModal && (
+      {/* {showModal && (
         <div className="modal">
           <div className="modal-content">
             <h2>New Event</h2>
@@ -125,7 +126,7 @@ const Sidebar = () => {
             <button onClick={() => setShowModal(false)}>Close</button>
           </div>
         </div>
-      )}
+      )} */}
       <div className="sidebar-container">
         <ul>
           <li onClick={() => setShowModal(true)}>
@@ -146,6 +147,7 @@ const Sidebar = () => {
             Upcoming Events
           </li>
         </ul>
+        <EventMaker showModal={showModal} setShowModal={setShowModal} />
       </div>
     </>
   );

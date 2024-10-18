@@ -26,10 +26,20 @@ const eventSchema = new mongoose.Schema({
   },
   contacts: {
     type: String,
-    required: true,
-  }
-});
+    default: '',
+  },
+  image: {
+    filename: {
+      type: String,
+      required: true,
+    },
+    contentType: {
+      type: String,
+      required: true,
+    },
+  },
+}, { timestamps: true }); // Automatically add createdAt and updatedAt timestamps
 
-const Event = mongoose.model('Event', eventSchema);
-
+// Create and export the Event model
+const Event = mongoose.model('Event', EventSchema);
 module.exports = Event;
