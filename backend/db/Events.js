@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const eventSchema = new mongoose.Schema({
+// Create the event schema
+const EventSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -13,16 +14,13 @@ const eventSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  photos: {
-    type: String, // Path to the photo file
-    required: true,
-  },
   rules: {
     type: String,
+    default: '',
   },
   paymentAmount: {
     type: Number,
-    required: true,
+    default: 0,
   },
   contacts: {
     type: String,

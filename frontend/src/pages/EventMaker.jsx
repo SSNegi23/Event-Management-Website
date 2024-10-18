@@ -82,7 +82,7 @@ const EventMaker = ({ setShowModal, showModal }) => {
 
   return (
     <div>
-      <button onClick={() => setShowModal(true)}>Add New Event</button>
+      {/* <button onClick={() => setShowModal(true)}>Add New Event</button> */}
 
       {showModal && (
         <div className="modal">
@@ -119,7 +119,7 @@ const EventMaker = ({ setShowModal, showModal }) => {
               <input
                 type="file"
                 name="photos"
-                onChange={(e) => handleChange(e.target.files[0])}
+                onChange={handleChange}
                 accept="image/*"
                 required
               />
@@ -155,7 +155,7 @@ const EventMaker = ({ setShowModal, showModal }) => {
         </div>
       )}
 
-      <div>
+      {/* <div>
         <h3>All Events</h3>
         {events.map((event, index) => (
           <div key={index} className="event-card">
@@ -174,7 +174,7 @@ const EventMaker = ({ setShowModal, showModal }) => {
             <p>Contacts: {event.contacts}</p>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };
