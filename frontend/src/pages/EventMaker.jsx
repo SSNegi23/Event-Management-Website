@@ -7,42 +7,47 @@ const EventMaker = ({ setShowModal, showModal }) => {
     title: "",
     location: "",
     description: "",
-    // photos: null,
+    photos: null,
     rules: "",
     paymentAmount: "",
     contacts: "",
   });
-  // const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   // Handle input changes
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, files } = e.target;
     if (name === "photos") {
-     setFormData({
-    //     ...formData,
-    //     photos: files[0], // Save the selected file
-    //   });
-    // } else {
-    // }
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+      setFormData({
+        ...formData,
+        photos: files[0], // Save the selected file
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
-  // Handle form submission
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Create FormData object to send both text and file data
+    const data = new FormData();
+    data.append("title", formData.title);
+    data.append("location", formData.location);
+    data.append("description", formData.description);
+    data.append("photos", formData.photos); // Add the image file
+    data.append("rules", formData.rules);
+    data.append("paymentAmount", formData.paymentAmount);
+    data.append("contacts", formData.contacts);
+
     try {
       const response = await fetch("http://localhost:5000/upload", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData), // Send formData directly as JSON
+        body: data, // Send FormData
       });
 
       if (response.ok) {
@@ -63,7 +68,7 @@ const EventMaker = ({ setShowModal, showModal }) => {
       title: "",
       location: "",
       description: "",
-      photos: "",
+      photos: null,
       rules: "",
       paymentAmount: "",
       contacts: "",
@@ -71,9 +76,9 @@ const EventMaker = ({ setShowModal, showModal }) => {
   };
 
   // Get image URL from server
-  // const getImageUrl = (filename) => {
-  //   return `http://localhost:5000/uploads/${filename}`;
-  // };
+  const getImageUrl = (filename) => {
+    return `http://localhost:5000/uploads/${filename}`;
+  };
 
   return (
     <div>
@@ -117,7 +122,7 @@ const EventMaker = ({ setShowModal, showModal }) => {
                 onChange={(e) => handleChange(e.target.files[0])}
                 accept="image/*"
                 required
-              /> 
+              />
 
               <label>Rules</label>
               <textarea
@@ -157,13 +162,13 @@ const EventMaker = ({ setShowModal, showModal }) => {
             <h4>{event.title}</h4>
             <p>{event.location}</p>
             <p>{event.description}</p>
-            {/* {event.image && (
+            {event.image && (
               <img
                 src={getImageUrl(event.image)} // Use image directly
                 alt="Event"
                 width="100"
               />
-            )} */}
+            )}
             <p>{event.rules}</p>
             <p>Payment: {event.paymentAmount}</p>
             <p>Contacts: {event.contacts}</p>
