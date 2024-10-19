@@ -7,3 +7,19 @@
   display: inline-block;
   margin: 2rem 1rem;
 }
+.logoutmenustyle{
+  display: flex;
+  flex-direction: column;
+}
+.logoutmenudivstlye{
+  background-color:azure;
+  position: absolute;
+  right: 0;
+  top: 71px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 0px 14px 17px 14px;
+}
+.logoutmenuli{
+  font-size: 12px;
+  margin: 28px 0px 0px 0px!important;
+}
