@@ -11,6 +11,7 @@ const EventMaker = ({ setShowModal, showModal }) => {
     rules: "",
     paymentAmount: "",
     contacts: "",
+    organizer: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -43,6 +44,7 @@ const EventMaker = ({ setShowModal, showModal }) => {
     data.append("rules", formData.rules);
     data.append("paymentAmount", formData.paymentAmount);
     data.append("contacts", formData.contacts);
+    data.append("organizer", formData.organizer);
 
     try {
       const response = await fetch("http://localhost:5000/upload", {
@@ -72,6 +74,7 @@ const EventMaker = ({ setShowModal, showModal }) => {
       rules: "",
       paymentAmount: "",
       contacts: "",
+      organizer: "",
     });
   };
 
@@ -136,6 +139,14 @@ const EventMaker = ({ setShowModal, showModal }) => {
                 type="number"
                 name="paymentAmount"
                 value={formData.paymentAmount}
+                onChange={handleChange}
+              />
+
+              <label>Organizer</label>
+              <input
+                type="text"
+                name="organizer"
+                value={formData.organizer}
                 onChange={handleChange}
               />
 

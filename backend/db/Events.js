@@ -37,6 +37,11 @@ const EventSchema = new mongoose.Schema({
     // },
     type: String,
   },
+  organizer: {
+    type: String,
+    required: true,
+    default: '',
+  }
 }, { timestamps: true, collection: "Event" }); // Automatically add createdAt and updatedAt timestamps
 
 // Create and export the Event model

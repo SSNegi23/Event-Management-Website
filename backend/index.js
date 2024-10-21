@@ -89,6 +89,7 @@ app.post("/upload", upload.single("photos"), async (req, res) => {
     paymentAmount: req.body.paymentAmount,
     contacts: req.body.contacts,
     image: req.file.filename, // Save the filename in the database
+    organizer: req.body.organizer,
   });
 
   try {
@@ -98,6 +99,12 @@ app.post("/upload", upload.single("photos"), async (req, res) => {
     res.status(400).send(error);
   }
 });
+
+// app.get("/upload", async (req, res) => {
+//   try {
+//     const 
+//   }
+// })
 
 // Route to get all events
 app.get("/events", async (req, res) => {

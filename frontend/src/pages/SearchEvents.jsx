@@ -1,198 +1,200 @@
-import { useState } from 'react';
+import { useEffect, useState } from "react";
 import EventCard from "../components/EventCard";
 import "../styles/SearchEvents.css";
 
-const details = [
-  {
-    id: 1,
-    title: "Event Title",
-    img: "src\\assets\\images\\logo.jpg",
-    location: "Delhi",
-    desc: "This is the description of the event.",
-    price: 25,
-    organizer: "ASD Company",
-  },
-  {
-    id: 2,
-    title: "Event Title",
-    img: "src\\assets\\images\\logo.jpg",
-    location: "Delhi",
-    desc: "This is the description of the event.",
-    price: 50,
-    organizer: "XYZ Company",
-  },
-  {
-    id: 3,
-    title: "Event Title",
-    img: "src\\assets\\images\\logo.jpg",
-    location: "Mumbai",
-    desc: "This is the description of the event.",
-    price: 100,
-    organizer: "ABC Company",
-  },
-  {
-    id: 4,
-    title: "Event Title",
-    img: "src\\assets\\images\\logo.jpg",
-    location: "Bangalore",
-    desc: "This is the description of the event.",
-    price: 75,
-    organizer: "DEF Company",
-  },
-  {
-    id: 5,
-    title: "Event Title",
-    img: "src\\assets\\images\\logo.jpg",
-    location: "Bangalore",
-    desc: "This is the description of the event.",
-    price: 75,
-    organizer: "DEF Company",
-  },
-  {
-    id: 6,
-    title: "Event Title",
-    img: "src\\assets\\images\\logo.jpg",
-    location: "Bangalore",
-    desc: "This is the description of the event.",
-    price: 75,
-    organizer: "DEF Company",
-  },
-  {
-    id: 7,
-    title: "Event Title",
-    img: "src\\assets\\images\\logo.jpg",
-    location: "Bangalore",
-    desc: "This is the description of the event.",
-    price: 75,
-    organizer: "DEF Company",
-  },
-  {
-    id: 8,
-    title: "Event Title",
-    img: "src\\assets\\images\\logo.jpg",
-    location: "Bangalore",
-    desc: "This is the description of the event.",
-    price: 75,
-    organizer: "DEF Company",
-  },
-  {
-    id: 9,
-    title: "Event Title",
-    img: "src\\assets\\images\\logo.jpg",
-    location: "Bangalore",
-    desc: "This is the description of the event.",
-    price: 75,
-    organizer: "DEF Company",
-  },
-  {
-    id: 10,
-    title: "Event Title",
-    img: "src\\assets\\images\\logo.jpg",
-    location: "Bangalore",
-    desc: "This is the description of the event.",
-    price: 75,
-    organizer: "DEF Company",
-  },
-  {
-    id: 11,
-    title: "Event Title",
-    img: "src\\assets\\images\\logo.jpg",
-    location: "Bangalore",
-    desc: "This is the description of the event.",
-    price: 75,
-    organizer: "DEF Company",
-  },
-  {
-    id: 12,
-    title: "Event Title",
-    img: "src\\assets\\images\\logo.jpg",
-    location: "Bangalore",
-    desc: "This is the description of the event.",
-    price: 75,
-    organizer: "DEF Company",
-  },
-  {
-    id: 13,
-    title: "Event Title",
-    img: "src\\assets\\images\\logo.jpg",
-    location: "Bangalore",
-    desc: "This is the description of the event.",
-    price: 75,
-    organizer: "DEF Company",
-  },
-  {
-    id: 14,
-    title: "Event Title",
-    img: "src\\assets\\images\\logo.jpg",
-    location: "Bangalore",
-    desc: "This is the description of the event.",
-    price: 75,
-    organizer: "DEF Company",
-  },
-  {
-    id: 15,
-    title: "Event Title",
-    img: "src\\assets\\images\\logo.jpg",
-    location: "Bangalore",
-    desc: "This is the description of the event.",
-    price: 75,
-    organizer: "DEF Company",
-  },
-  {
-    id: 16,
-    title: "Event Title",
-    img: "src\\assets\\images\\logo.jpg",
-    location: "Bangalore",
-    desc: "This is the description of the event.",
-    price: 75,
-    organizer: "DEF Company",
-  },
-  {
-    id: 17,
-    title: "Event Title",
-    img: "src\\assets\\images\\logo.jpg",
-    location: "Bangalore",
-    desc: "This is the description of the event.",
-    price: 75,
-    organizer: "DEF Company",
-  },
-  {
-    id: 18,
-    title: "Event Title",
-    img: "src\\assets\\images\\logo.jpg",
-    location: "Bangalore",
-    desc: "This is the description of the event.",
-    price: 75,
-    organizer: "DEF Company",
-  },
-  {
-    id: 19,
-    title: "Event Title",
-    img: "src\\assets\\images\\logo.jpg",
-    location: "Bangalore",
-    desc: "This is the description of the event.",
-    price: 75,
-    organizer: "DEF Company",
-  },
-  {
-    id: 20,
-    title: "Event Title",
-    img: "src\\assets\\images\\logo.jpg",
-    location: "Bangalore",
-    desc: "This is the description of the event.",
-    price: 75,
-    organizer: "DEF Company",
-  }
-];
+// const details = [
+//   {
+//     id: 1,
+//     title: "Event Title",
+//     img: "src\\assets\\images\\logo.jpg",
+//     location: "Delhi",
+//     desc: "This is the description of the event.",
+//     price: 25,
+//     organizer: "ASD Company",
+//   },
+//   {
+//     id: 2,
+//     title: "Event Title",
+//     img: "src\\assets\\images\\logo.jpg",
+//     location: "Delhi",
+//     desc: "This is the description of the event.",
+//     price: 50,
+//     organizer: "XYZ Company",
+//   },
+//   {
+//     id: 3,
+//     title: "Event Title",
+//     img: "src\\assets\\images\\logo.jpg",
+//     location: "Mumbai",
+//     desc: "This is the description of the event.",
+//     price: 100,
+//     organizer: "ABC Company",
+//   },
+//   {
+//     id: 4,
+//     title: "Event Title",
+//     img: "src\\assets\\images\\logo.jpg",
+//     location: "Bangalore",
+//     desc: "This is the description of the event.",
+//     price: 75,
+//     organizer: "DEF Company",
+//   },
+//   {
+//     id: 5,
+//     title: "Event Title",
+//     img: "src\\assets\\images\\logo.jpg",
+//     location: "Bangalore",
+//     desc: "This is the description of the event.",
+//     price: 75,
+//     organizer: "DEF Company",
+//   },
+//   {
+//     id: 6,
+//     title: "Event Title",
+//     img: "src\\assets\\images\\logo.jpg",
+//     location: "Bangalore",
+//     desc: "This is the description of the event.",
+//     price: 75,
+//     organizer: "DEF Company",
+//   },
+//   {
+//     id: 7,
+//     title: "Event Title",
+//     img: "src\\assets\\images\\logo.jpg",
+//     location: "Bangalore",
+//     desc: "This is the description of the event.",
+//     price: 75,
+//     organizer: "DEF Company",
+//   },
+//   {
+//     id: 8,
+//     title: "Event Title",
+//     img: "src\\assets\\images\\logo.jpg",
+//     location: "Bangalore",
+//     desc: "This is the description of the event.",
+//     price: 75,
+//     organizer: "DEF Company",
+//   },
+//   {
+//     id: 9,
+//     title: "Event Title",
+//     img: "src\\assets\\images\\logo.jpg",
+//     location: "Bangalore",
+//     desc: "This is the description of the event.",
+//     price: 75,
+//     organizer: "DEF Company",
+//   },
+//   {
+//     id: 10,
+//     title: "Event Title",
+//     img: "src\\assets\\images\\logo.jpg",
+//     location: "Bangalore",
+//     desc: "This is the description of the event.",
+//     price: 75,
+//     organizer: "DEF Company",
+//   },
+//   {
+//     id: 11,
+//     title: "Event Title",
+//     img: "src\\assets\\images\\logo.jpg",
+//     location: "Bangalore",
+//     desc: "This is the description of the event.",
+//     price: 75,
+//     organizer: "DEF Company",
+//   },
+//   {
+//     id: 12,
+//     title: "Event Title",
+//     img: "src\\assets\\images\\logo.jpg",
+//     location: "Bangalore",
+//     desc: "This is the description of the event.",
+//     price: 75,
+//     organizer: "DEF Company",
+//   },
+//   {
+//     id: 13,
+//     title: "Event Title",
+//     img: "src\\assets\\images\\logo.jpg",
+//     location: "Bangalore",
+//     desc: "This is the description of the event.",
+//     price: 75,
+//     organizer: "DEF Company",
+//   },
+//   {
+//     id: 14,
+//     title: "Event Title",
+//     img: "src\\assets\\images\\logo.jpg",
+//     location: "Bangalore",
+//     desc: "This is the description of the event.",
+//     price: 75,
+//     organizer: "DEF Company",
+//   },
+//   {
+//     id: 15,
+//     title: "Event Title",
+//     img: "src\\assets\\images\\logo.jpg",
+//     location: "Bangalore",
+//     desc: "This is the description of the event.",
+//     price: 75,
+//     organizer: "DEF Company",
+//   },
+//   {
+//     id: 16,
+//     title: "Event Title",
+//     img: "src\\assets\\images\\logo.jpg",
+//     location: "Bangalore",
+//     desc: "This is the description of the event.",
+//     price: 75,
+//     organizer: "DEF Company",
+//   },
+//   {
+//     id: 17,
+//     title: "Event Title",
+//     img: "src\\assets\\images\\logo.jpg",
+//     location: "Bangalore",
+//     desc: "This is the description of the event.",
+//     price: 75,
+//     organizer: "DEF Company",
+//   },
+//   {
+//     id: 18,
+//     title: "Event Title",
+//     img: "src\\assets\\images\\logo.jpg",
+//     location: "Bangalore",
+//     desc: "This is the description of the event.",
+//     price: 75,
+//     organizer: "DEF Company",
+//   },
+//   {
+//     id: 19,
+//     title: "Event Title",
+//     img: "src\\assets\\images\\logo.jpg",
+//     location: "Bangalore",
+//     desc: "This is the description of the event.",
+//     price: 75,
+//     organizer: "DEF Company",
+//   },
+//   {
+//     id: 20,
+//     title: "Event Title",
+//     img: "src\\assets\\images\\logo.jpg",
+//     location: "Bangalore",
+//     desc: "This is the description of the event.",
+//     price: 75,
+//     organizer: "DEF Company",
+//   }
+// ];
 
 const SearchEvents = () => {
+  const [details, setDetails] = useState([]);
   const [filteredDetails, setFilteredDetails] = useState(details);
   const [location, setLocation] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [organizer, setOrganizer] = useState("");
-  const [visibleCards, setVisibleCards] = useState(9);  // State to control visible cards
+  const [visibleCards, setVisibleCards] = useState(9); // State to control visible cards
 
+  console.log("filteredDetails:", filteredDetails);
 
   const handleFiltersChange = (e, field) => {
     let newLocation = location;
@@ -214,12 +216,16 @@ const SearchEvents = () => {
       setOrganizer(newOrganizer);
     }
 
-    
     const newDetails = details.filter((item) => {
-      const matchesLocation = newLocation === "" || item.location.toLowerCase().includes(newLocation.toLowerCase());
-      const matchesPrice = (newMinPrice === "" || item.price >= parseInt(newMinPrice)) &&
-                           (newMaxPrice === "" || item.price <= parseInt(newMaxPrice));
-      const matchesOrganizer = newOrganizer === "" || item.organizer.toLowerCase().includes(newOrganizer.toLowerCase());
+      const matchesLocation =
+        newLocation === "" ||
+        item.location.toLowerCase().includes(newLocation.toLowerCase());
+      const matchesPrice =
+        (newMinPrice === "" || item.paymentAmount >= parseInt(newMinPrice)) &&
+        (newMaxPrice === "" || item.paymentAmount <= parseInt(newMaxPrice));
+      const matchesOrganizer =
+        newOrganizer === "" ||
+        item.organizer.toLowerCase().includes(newOrganizer.toLowerCase());
 
       return matchesLocation && matchesPrice && matchesOrganizer;
     });
@@ -228,13 +234,38 @@ const SearchEvents = () => {
   };
 
   const handleLoadMore = () => {
-    if(visibleCards+9<filteredDetails.length){
-      setVisibleCards(visibleCards+9);
-    }
-    else{
+    if (visibleCards + 9 < filteredDetails.length) {
+      setVisibleCards(visibleCards + 9);
+    } else {
       setVisibleCards(filteredDetails.length);
     }
   };
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        const response = await fetch("http://localhost:5000/events", {
+          method: "GET",
+        });
+        const data = await response.json();
+        console.log("data:", data);
+        // const newData = JSON.parse(data);
+        // console.log(newData);
+        setDetails(data);
+        // console.log(details);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    getData();
+  }, []);
+
+  // Use another useEffect to track changes in details
+  useEffect(() => {
+    console.log("details:", details); // This will log the updated `details`
+    setFilteredDetails(details);
+  }, [details]); // Run when `details` changes
 
   return (
     <div className="search-events-container">
@@ -284,7 +315,7 @@ const SearchEvents = () => {
 
       <div className="card-container">
         {filteredDetails.slice(0, visibleCards).map((item) => (
-          <EventCard details={item} key={item.id} />
+          <EventCard details={item} key={item._id} />
         ))}
       </div>
 
