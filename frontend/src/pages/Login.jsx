@@ -10,7 +10,7 @@ const Login = () => {
     if(auth) {
       navigate("/home");
     }
-  })
+  },[])
 
   const handleLogin = async () => {
     // console.warn(email, password);
@@ -31,6 +31,10 @@ const Login = () => {
       alert("Please enter correct details");
     }
   }
+  
+  const handleSignup = () => {
+    navigate('/signUp')
+  }
 
   return (
     <div className='login'>
@@ -38,6 +42,7 @@ const Login = () => {
       <input type='text' className='inputBox' placeholder='Enter Email' onChange={(e) => setEmail(e.target.value)} value={email} />
       <input type='password' className='inputBox' placeholder='Enter Password' onChange={(e) => setPassword(e.target.value)} value={password} />
       <button onClick={handleLogin} className='appButton' type='button'>Login</button>
+      <button onClick={handleSignup} className='appButton' type='button'>Sign Up</button>
     </div>
   )
 }

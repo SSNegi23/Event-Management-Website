@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import "../styles/SignUp.css"
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -31,6 +32,9 @@ const SignUp = () => {
     {/* localStorage.setItem("token",JSON.stringify(result.auth));  */}
     navigate('/login');
   }
+  const gologin = () =>{
+    navigate('/login');
+  }
 
   return (
     <div className='register'>
@@ -39,6 +43,7 @@ const SignUp = () => {
       <input className="inputBox" type='email' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Enter Email' />
       <input className="inputBox" type='text' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Enter Password' />
       <button className='appButton' type='button' onClick={collectData}>Sign Up</button>
+      <button className='appButton' type='button' onClick={gologin}>Login</button>
     </div>
   )
 }

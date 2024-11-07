@@ -11,7 +11,6 @@ const Navbar = () => {
     e.preventDefault();
   }
   const handleLogout = () =>{
-    console.log("hello")
     localStorage.clear();
     navigate('/signup');
   }
