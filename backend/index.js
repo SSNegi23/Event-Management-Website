@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-const mongoose = require("mongoose");
 const multer = require("multer");
 const path = require("path");
 const Jwt = require("jsonwebtoken");
@@ -27,6 +26,21 @@ app.post("/signup", async (req, res) => {
       }
       res.send({ result, auth: token });
     });
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+// Route to get user data by ID
+app.get("/signup/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).select("-password"); // Exclude password from the response
+    if (user) {
+      console.log(user);
+      res.status(200).json(user);
+    } else {
+      res.status(404).send({ result: "User not found" });
+    }
   } catch (error) {
     res.status(400).send(error);
   }
@@ -99,12 +113,6 @@ app.post("/upload", upload.single("photos"), async (req, res) => {
     res.status(400).send(error);
   }
 });
-
-// app.get("/upload", async (req, res) => {
-//   try {
-//     const 
-//   }
-// })
 
 // Route to get all events
 app.get("/events", async (req, res) => {

@@ -1,6 +1,30 @@
+import { useEffect, useState } from "react";
 import "../styles/Profile.css";
 
 const Profile = () => {
+  const [details, setDetails] = useState([]);
+
+  useEffect(() =>  {
+    async function getUser() {
+      let user = localStorage.getItem('user');
+      user = JSON.parse(user);
+      // console.log("user: ", user);
+      // console.log("user id: ", user._id);
+      try {
+        const response = await fetch(`http://localhost:5000/signup/${user._id}`, {
+          method: "GET",
+        })
+        const userDetails = await response.json();
+        setDetails(userDetails);
+        console.log(userDetails);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    getUser();
+  }, []);
+
   return (
     <div>
       <div className="profile-container">
@@ -10,15 +34,16 @@ const Profile = () => {
               <div className="user-address"> CURRENT ADDRESS</div>
            </div>
            <div className="profile-top-right-container">
-              <div className="profile-top-right-container-elements-main">First Name</div>
-              <div className="profile-top-right-container-elements-main">Second Name</div>
-              <div className="profile-top-right-container-elements-secondary">John</div>
-              <div className="profile-top-right-container-elements-secondary">Doe</div>
+              <div className="profile-top-right-container-elements-main">User Name</div>
+              <div className="profile-top-right-container-elements-main">Gender</div>
+              <div className="profile-top-right-container-elements-secondary">{details.name}</div>
+              <div className="profile-top-right-container-elements-secondary">{details.gender}</div>
               <div className="profile-top-right-container-elements-main">Phone</div>
               <div className="profile-top-right-container-elements-main">Email</div>
-              <div className="profile-top-right-container-elements-secondary">9811111111</div>
-              <div className="profile-top-right-container-elements-secondary">abc@gmail.com</div>
+              <div className="profile-top-right-container-elements-secondary">{details.phoneNumber}</div>
+              <div className="profile-top-right-container-elements-secondary">{details.email}</div>
            </div>
+           {/* user {user._id} */}
 
             {/* 
             <form onSubmit={handleSubmit(onSubmit)}>
