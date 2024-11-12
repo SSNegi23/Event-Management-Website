@@ -64,4 +64,5 @@ input {
     margin-left: 0.25rem!important;
     margin-top: 0.25rem!important;
     margin-bottom: 0.25rem!important;
+    border: 0.05rem solid black;
 }

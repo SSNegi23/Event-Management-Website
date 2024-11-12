@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import "../styles/Profile.css";
 
 const Profile = () => {
   const [details, setDetails] = useState([]);
+  const [address, setaddress] = useState("Add Address");
+  const [changingaddress, setchangingaddress]= useState(false);
+  const [changemediahandles, setchangemediahandles]= useState(false);
+  const [Facebooklink, setFacebooklink]= useState("Link your Facebook");
+  const [Instagramlink, setInstagramlink]= useState("Link your Instagram");
+  const [Twitterlink,setTwitterlink]= useState("Link your Twitter");
 
   useEffect(() =>  {
     async function getUser() {
@@ -25,13 +32,39 @@ const Profile = () => {
     getUser();
   }, []);
 
+  const changeaddress = () => {
+      setchangingaddress(!changingaddress);
+  }
+
+  const saveaddress = (e) => {
+    setaddress(e.target.value);
+  }
+
+  const changingmediahandles = () =>{
+    setchangemediahandles(!changemediahandles);
+  }
+
+  const changefacebook = (e) => {
+    setFacebooklink(e.target.value);
+  }
+
+  const changeinstagram = (e) =>{
+    setInstagramlink(e.target.value);
+  }
+   
+  const changetwitter = (e) => {
+    setTwitterlink(e.target.value);
+  }
+
   return (
     <div>
       <div className="profile-container">
         <div className="profile-top-container">
            <div className="profile-top-left-container">
               <div className="profile-img w-32 h-32"><img  src="src\assets\images\logo.jpg" className="rounded-full"></img></div>
-              <div className="user-address"> CURRENT ADDRESS</div>
+              <div className="user-address"> 
+                 { changingaddress ? <><input type="text" onChange={saveaddress}></input><i class="fa-solid fa-floppy-disk" onClick={changeaddress}></i></>: <><div className="user-address-heading">{address}</div><i class="fa-solid fa-pen-to-square" onClick={changeaddress}></i></> }
+              </div>
            </div>
            <div className="profile-top-right-container">
               <div className="profile-top-right-container-elements-main">User Name</div>
@@ -58,19 +91,40 @@ const Profile = () => {
         </div>
         <div className="profile-bottom-container">
         <div className="profile-bottom-left-container">
-          <div className="title">Media Handles</div>
-          <div className="tiles">
-            <p>Facebook: </p>
-            <p>john</p>
-          </div>
-          <div className="tiles">
-            <p>Instagram: </p>
-            <p>john</p>
-          </div>
-          <div className="tiles">
-            <p>Twitter: </p>
-            <p>john</p>
-          </div>
+          <div className="title">Media Handles </div>
+          { changemediahandles ? 
+              <>
+              <div className="tiles">
+               <p>Facebook: </p>
+               <input type="text" onChange={changefacebook}></input>
+              </div>
+              <div className="tiles">
+               <p>Instagram: </p>
+               <input type="text" onChange={changeinstagram}></input>
+              </div>
+              <div className="tiles">
+               <p>Twitter: </p>
+               <input type="text" onChange={changetwitter}></input>
+              </div>
+              <i class="fa-solid fa-floppy-disk" onClick={changingmediahandles}></i>
+              </>
+              :
+              <>
+              <div className="tiles">
+               <p>Facebook: </p>
+               <p>{Facebooklink}</p>
+              </div>
+              <div className="tiles">
+               <p>Instagram: </p>
+               <p>{Instagramlink}</p>
+              </div>
+              <div className="tiles">
+               <p>Twitter: </p>
+               <p>{Twitterlink}</p>
+              </div>
+              <i class="fa-solid fa-pen-to-square" onClick={changingmediahandles}></i>
+              </>
+          }
         </div>
         <div className="profile-bottom-right-container">
           <div className="title">
