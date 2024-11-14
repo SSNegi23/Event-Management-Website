@@ -10,6 +10,8 @@ const Profile = () => {
   const [Facebooklink, setFacebooklink]= useState("Link your Facebook");
   const [Instagramlink, setInstagramlink]= useState("Link your Instagram");
   const [Twitterlink,setTwitterlink]= useState("Link your Twitter");
+  const [Hobbies, setHobbies]= useState(["cricket","hockey"]);
+  const [newHobby, setnewHobby] = useState("");
 
   useEffect(() =>  {
     async function getUser() {
@@ -54,6 +56,19 @@ const Profile = () => {
    
   const changetwitter = (e) => {
     setTwitterlink(e.target.value);
+  }
+
+  const changehobby = (e) => {
+    setnewHobby(e.target.value);
+  }
+  const addhobby = (e) => {
+    setHobbies([...Hobbies, newHobby]);
+    setnewHobby("");
+  }
+
+  const deleteHobby = (hobbyToDelete) =>{
+    setHobbies(Hobbies.filter((hobby => hobby !== hobbyToDelete)));
+    console.log(Hobbies);
   }
 
   return (
@@ -131,10 +146,23 @@ const Profile = () => {
             Interests
           </div>
           <div>
-            <p className="interests">Cricket</p>
+            <input type="text" onChange={changehobby} value={newHobby}></input>
+            <i class="fa-solid fa-plus" onClick={addhobby}></i>
+            {
+              Hobbies.map((hobby, ind) => {
+                return(
+                  < div key={ind}>
+                  <p className="interests" >{hobby}</p>
+                  <i class="fa-solid fa-trash" onClick={() => deleteHobby(hobby)}></i>
+                  </div>
+                )
+              })
+            }
+            {/* (ind) => {delete Hobbies[ind]}
+             <p className="interests">Cricket</p>
             <p className="interests">Football</p>
             <p className="interests">Fitness</p>
-            <p className="interests">Gaming</p>
+            <p className="interests">Gaming</p> */}
           </div>
         </div>
         </div>
