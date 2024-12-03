@@ -32,7 +32,7 @@ app.post("/signup", async (req, res) => {
 });
 
 // Route to get user data by ID
-app.get("/signup/:id", async (req, res) => {
+app.get("/user/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id).select("-password"); // Exclude password from the response
     if (user) {
@@ -45,6 +45,28 @@ app.get("/signup/:id", async (req, res) => {
     res.status(400).send(error);
   }
 });
+
+// Update user details route
+app.put("/user/:id", async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        address: req.body.address,
+        mediaHandles: req.body.mediaHandles,
+        hobbies: req.body.hobbies,
+      },
+      { new: true } // Return the updated document
+    );
+    if (!updatedUser) {
+      return res.status(404).send({ result: "User not found" });
+    }
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
 
 // User login route
 app.post("/login", async (req, res) => {
