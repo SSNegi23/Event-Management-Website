@@ -31,31 +31,21 @@ function App() {
     <div>
       <Navbar />
       <Routes>
-        {isAuthenticated ? (
-          <>
-            {/* Nested routes under MainContainer */}
-            <Route path="/" element={<MainContainer />}>
-              <Route index element={<Home />} />
-              <Route path="home" element={<Home />} />
-              <Route path="calendar" element={<MyCalendar />} />
-              <Route path="search-event" element={<SearchEvents />} />
-            </Route>
-            {/* Individual routes */}
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/event" element={<Event />} />
-            <Route path="/eventmaker" element={<EventMaker />} />
-            <Route path="/login" element={<Navigate to="/home" />} />
-            <Route path="/signup" element={<Navigate to="/home" />} />
-            {/* Fallback wildcard route */}
-            <Route path="*" element={<Navigate to="/home" />} />
-          </>
-        ) : (
-          <>
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="*" element={<Navigate to="/login" />} />
-          </>
-        )}
+        <Route path="/" element={<MainContainer />}>
+          <Route index element={<Home />} />
+          <Route path="home" element={<Home />} />
+          <Route path="calendar" element={<MyCalendar />} />
+          <Route path="search-event" element={<SearchEvents />} />
+        </Route>
+        {/* Individual routes */}
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/event" element={<Event />} />
+        <Route path="/eventmaker" element={<EventMaker />} />
+        {/* Redirect to home if user is already logged in */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        {/* Fallback wildcard route */}
+        <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
     </div>
   );
