@@ -1,0 +1,43 @@
+.event-details-container {
+    padding: 20px;
+  }
+  
+  .event-details-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .event-details-main,
+  .event-details-secondary {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px 0;
+  }
+  
+  .left-div,
+  .right-div {
+    width: 30%;
+  }
+  
+  .event-photo {
+    width: 100%;
+    height: auto;
+  }
+  
+  .payment-link {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .payment-link a {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .payment-link a:hover {
+    background-color: #0056b3;
+  }
+  

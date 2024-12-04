@@ -11,6 +11,7 @@ import MyCalendar from "./pages/Calendar";
 import EventMaker from "./pages/EventMaker";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import EventDetails from "./components/EventDetails";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -38,6 +39,7 @@ function App() {
           <Route path="search-event" element={<SearchEvents />} />
         </Route>
         {/* Individual routes */}
+        <Route path="/event-details" element={<EventDetails />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/event" element={<Event />} />
         <Route path="/eventmaker" element={<EventMaker />} />
