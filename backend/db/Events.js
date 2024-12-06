@@ -33,6 +33,9 @@ const EventSchema = new mongoose.Schema({
     type: String,
     required: true,
     default: '',
+  },
+  paymentlink: {
+    type: String,
   }
 }, { timestamps: true, collection: "Event" }); // Automatically add createdAt and updatedAt timestamps
 

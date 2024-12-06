@@ -114,8 +114,13 @@ const upload = multer({
 });
 
 // Route to upload images and create an event
-app.post("/upload", upload.single("photos"), async (req, res) => {
-  if (!req.file) return res.status(400).send("No file uploaded");
+app.post("/upload", upload.fields([
+  { name: "photos", maxCount: 1 },
+  { name: "paymentlink", maxCount: 1 }
+]), async (req, res) => {
+  if (!req.files || !req.files.photos || !req.files.paymentlink) {
+    return res.status(400).send("Both photos and payment link images are required.");
+  }
 
   const event = new Event({
     title: req.body.title,
@@ -124,12 +129,14 @@ app.post("/upload", upload.single("photos"), async (req, res) => {
     rules: req.body.rules,
     paymentAmount: req.body.paymentAmount,
     contacts: req.body.contacts,
-    image: req.file.filename, // Save the filename in the database
+    image: req.files.photos[0].filename, // Save the filename for the "photos" field
+    paymentlink: req.files.paymentlink[0].filename, // Save the filename for the "paymentlink" field
     organizer: req.body.organizer,
   });
 
   try {
     await event.save();
+    console.log(event);
     res.status(201).json({ event });
   } catch (error) {
     res.status(400).send(error);

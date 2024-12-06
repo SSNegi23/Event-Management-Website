@@ -11,6 +11,7 @@ const EventMaker = ({ setShowModal, showModal }) => {
     rules: "",
     paymentAmount: "",
     contacts: "",
+    paymentlink: null,
     organizer: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
@@ -18,10 +19,10 @@ const EventMaker = ({ setShowModal, showModal }) => {
   // Handle input changes
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    if (name === "photos") {
+    if (name === "photos" || name === "paymentlink") {
       setFormData({
         ...formData,
-        photos: files[0], // Save the selected file
+        [name]: files[0], // Save the selected file
       });
     } else {
       setFormData({
@@ -40,9 +41,10 @@ const EventMaker = ({ setShowModal, showModal }) => {
     data.append("title", formData.title);
     data.append("location", formData.location);
     data.append("description", formData.description);
-    data.append("photos", formData.photos); // Add the image file
+    data.append("photos", formData.photos); // Add the event photo
     data.append("rules", formData.rules);
     data.append("paymentAmount", formData.paymentAmount);
+    data.append("paymentlink", formData.paymentlink); // Add the payment link image
     data.append("contacts", formData.contacts);
     data.append("organizer", formData.organizer);
 
@@ -58,7 +60,7 @@ const EventMaker = ({ setShowModal, showModal }) => {
         setShowModal(false);
         setErrorMessage("");
       } else {
-        setErrorMessage("Failed to create event");
+        setErrorMessage("Failed to create event. Please try again.");
       }
     } catch (error) {
       setErrorMessage("Error: " + error.message);
@@ -74,6 +76,7 @@ const EventMaker = ({ setShowModal, showModal }) => {
       rules: "",
       paymentAmount: "",
       contacts: "",
+      paymentlink: null,
       organizer: "",
     });
   };
@@ -85,8 +88,6 @@ const EventMaker = ({ setShowModal, showModal }) => {
 
   return (
     <div>
-      {/* <button onClick={() => setShowModal(true)}>Add New Event</button> */}
-
       {showModal && (
         <div className="modal">
           <div className="modal-content">
@@ -150,6 +151,15 @@ const EventMaker = ({ setShowModal, showModal }) => {
                 onChange={handleChange}
               />
 
+              <label>Payment Link</label>
+              <input
+                type="file"
+                name="paymentlink"
+                onChange={handleChange}
+                accept="image/*"
+                required
+              />
+
               <label>Contacts</label>
               <input
                 type="text"
@@ -165,27 +175,6 @@ const EventMaker = ({ setShowModal, showModal }) => {
           </div>
         </div>
       )}
-
-      {/* <div>
-        <h3>All Events</h3>
-        {events.map((event, index) => (
-          <div key={index} className="event-card">
-            <h4>{event.title}</h4>
-            <p>{event.location}</p>
-            <p>{event.description}</p>
-            {event.image && (
-              <img
-                src={getImageUrl(event.image)} // Use image directly
-                alt="Event"
-                width="100"
-              />
-            )}
-            <p>{event.rules}</p>
-            <p>Payment: {event.paymentAmount}</p>
-            <p>Contacts: {event.contacts}</p>
-          </div>
-        ))}
-      </div> */}
     </div>
   );
 };

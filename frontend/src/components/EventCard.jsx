@@ -12,6 +12,8 @@ const EventCard = ({ details }) => {
     return `http://localhost:5000/uploads/${filename}`;
   };
 
+  
+
   return (
     <div className="event-card-container" onClick={handleCardClick}>
       <div className="event-card-title">{details.title}</div>
