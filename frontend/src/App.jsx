@@ -12,6 +12,7 @@ import EventMaker from "./pages/EventMaker";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import EventDetails from "./components/EventDetails";
+import List from "./pages/List";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -43,6 +44,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/event" element={<Event />} />
         <Route path="/eventmaker" element={<EventMaker />} />
+        <Route path="/list" element={<List />} />
         {/* Redirect to home if user is already logged in */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />

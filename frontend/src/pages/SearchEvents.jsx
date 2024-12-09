@@ -11,8 +11,6 @@ const SearchEvents = () => {
   const [organizer, setOrganizer] = useState("");
   const [visibleCards, setVisibleCards] = useState(9); // State to control visible cards
 
-  console.log("filteredDetails:", filteredDetails);
-
   const handleFiltersChange = (e, field) => {
     let newLocation = location;
     let newMinPrice = minPrice;
@@ -65,11 +63,7 @@ const SearchEvents = () => {
           method: "GET",
         });
         const data = await response.json();
-        console.log("data:", data);
-        // const newData = JSON.parse(data);
-        // console.log(newData);
         setDetails(data);
-        // console.log(details);
       } catch (error) {
         console.error(error);
       }
@@ -80,7 +74,6 @@ const SearchEvents = () => {
 
   // Use another useEffect to track changes in details
   useEffect(() => {
-    console.log("details:", details); // This will log the updated `details`
     setFilteredDetails(details);
   }, [details]); // Run when `details` changes
 

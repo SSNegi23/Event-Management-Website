@@ -28,7 +28,7 @@ const Navbar = () => {
       </div>
       <div className="navlinks">
         <ul>
-          <li>
+          <li onClick={() => navigate("/list")}>
             <a href="">
               <i className="fa-solid fa-list fa-2x"></i>
             </a>

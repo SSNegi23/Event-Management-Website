@@ -24,7 +24,11 @@ const EventDetails = () => {
       <h1 className="event-details-title">{details.title}</h1>
       <div className="event-details-main">
         <div className="left-div">
-          <img src={getImageUrl(details.image)} alt="Event" className="event-photo" />
+          <img
+            src={getImageUrl(details.image)}
+            alt="Event"
+            className="event-photo"
+          />
         </div>
         <div className="right-div">
           <p>{details.description}</p>
@@ -39,7 +43,14 @@ const EventDetails = () => {
       <div className="event-details-secondary">
         <div className="left-div">
           <h3>Rules</h3>
-          <p>{details.rules}</p>
+          <ul>
+            {details.rules
+              .split(/\d+\.\s*/) // Split based on a number followed by a period and a space
+              .filter((rule) => rule.trim() !== "") // Remove empty rules
+              .map((rule, index) => (
+                <li key={index}>{rule.trim()}</li> // Trim and render as a list item
+              ))}
+          </ul>
         </div>
         <div className="right-div">
           <h3>Contact</h3>
@@ -50,12 +61,19 @@ const EventDetails = () => {
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
-          
             <h2>Payment Link</h2>
             {/* Ensure the correct property name is used */}
-            <img src={getImageUrl(details.paymentlink)} alt="Payment Link" className="event-photo" />
+            <img
+              src={getImageUrl(details.paymentlink)}
+              alt="Payment Link"
+              className="event-photo"
+            />
             <p>
-              <a href={getImageUrl(details.paymentlink)} target="_blank" rel="noopener noreferrer">
+              <a
+                href={getImageUrl(details.paymentlink)}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Click here to make your payment
               </a>
             </p>
