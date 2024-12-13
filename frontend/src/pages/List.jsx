@@ -17,8 +17,8 @@ const List = () => {
         <ul>
           {eventList.map((event) => (
             <li key={event._id} className="event-list-item">
-              <h3>{event.title}</h3>
-              <p>{event.description}</p>
+              <h3>Title: {event.title}</h3>
+              <p>Description: {event.description}</p>
               <p>Location: {event.location}</p>
               <p>Price: {event.paymentAmount}</p>
               <button

@@ -24,7 +24,8 @@ const Login = () => {
     result = await result.json();
     if (result.auth) {
       localStorage.setItem("user", JSON.stringify(result.user));
-      localStorage.setItem("token", JSON.stringify(result.auth));
+      // localStorage.setItem("token", JSON.stringify(result.auth));
+      localStorage.setItem("token", result.auth);
       navigate("/home");
     } else {
       alert("Please enter correct details");

@@ -153,6 +153,80 @@ app.get("/events", async (req, res) => {
   }
 });
 
+// app.put("/eventList/:id", async (req, res) => {
+//   const obj = req.body;
+//   try {
+//     const updatedUser = await User.findByIdAndUpdate(
+//       req.params.id,
+//       {
+//         eventList: req.body.eventList,
+//       },
+//       { new: true } // Return the updated document
+//     );
+//     if (!updatedUser) {
+//       return res.status(404).send({ result: "User not found" });
+//     }
+//     res.status(200).json(updatedUser);
+//   } catch (error) {
+//     res.status(400).send(error);
+//   }
+// });
+
+const verifyToken = (req, res, next) => {
+  const token = req.headers["authorization"];
+  if (!token) return res.status(403).send("Token is required");
+  try {
+    req.user = Jwt.verify(token, jwtKey);
+    next();
+  } catch (err) {
+    res.status(401).send("Invalid Token");
+  }
+};
+
+// Add event to user's eventList
+app.post("/eventList/:id", async (req, res) => {
+  const { eventId } = req.body;
+  if (!eventId) return res.status(400).send({ result: "Event ID is required" });
+
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).send({ result: "User not found" });
+
+    const eventExists = await Event.findById(eventId);
+    if (!eventExists) return res.status(404).send({ result: "Event not found" });
+
+    if (user.eventList.some((event) => event._id.toString() === eventId)) {
+      return res.status(400).send({ result: "Event already added to list" });
+    }
+
+    user.eventList.push(eventExists);
+    await user.save();
+    res.status(200).json(user.eventList);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+// Remove event from user's eventList
+app.delete("/eventList/:id", async (req, res) => {
+  const { eventId } = req.body;
+  if (!eventId) return res.status(400).send({ result: "Event ID is required" });
+
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).send({ result: "User not found" });
+
+    const updatedEventList = user.eventList.filter(
+      (event) => event._id.toString() !== eventId
+    );
+    user.eventList = updatedEventList;
+    await user.save();
+    res.status(200).json(user.eventList);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 // Start the server
 app.listen(5000, () => {
   console.log("Server is running on port 5000");

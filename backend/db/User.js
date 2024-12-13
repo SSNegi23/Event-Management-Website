@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema({
   },
   hobbies: { type: [String], default: [] }, // List of hobbies
   createdAt: { type: Date, default: Date.now }, // Auto-timestamp for user creation
+  eventList: { type: [Object], default: [] },
 });
 
 module.exports = mongoose.model("User", userSchema);
